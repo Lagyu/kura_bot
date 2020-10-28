@@ -82,7 +82,7 @@ if __name__ == '__main__':
     hours = [18, 19, 20]  # 何時台を検索するかを指定します。
     store_id_to_search = 110202  # 店舗URLの末尾の数字を指定します。
     # 例；くら寿司品川駅前店（ https://epark.jp/detail/wait/479 ）の場合、「479」。
-    access_token = "EvGe4s9q80MOYTI49w0yMaAcM6DlZuu0K3MQr78Gw3R"# LINEアクセストークンを指定します。
+    access_token = "hogehoge" # LINEアクセストークンを指定します。
     # 設定ここまで
 
     do_mugen(access_token, store_id_to_search, hours)
