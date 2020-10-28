@@ -33,35 +33,42 @@ def get_department_id(store_id: int) -> int:
     return depart_id
 
 
-def calculate_epoch_time_of_the_day(year: int, month: int, day: int) -> int:
-    date = datetime.datetime(year=year, month=month, day=day, hour=0, minute=0, second=0,
+def calculate_epoch_time_of_the_day() -> int:
+    current_jst_datetime = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
+    date = datetime.datetime(year=current_jst_datetime.year,
+                             month=current_jst_datetime.month,
+                             day=current_jst_datetime.day,
+                             hour=0, minute=0, second=0,
                              tzinfo=datetime.timezone(datetime.timedelta(hours=9)))
     return int(date.timestamp())
 
 
-def base_url_generator(store_id: int, department_id: int, epoch_JST_of_the_day: int) -> str:
+def base_url_generator(store_id: int, department_id: int, epoch_jst_of_the_day: int) -> str:
     return f"https://epark.jp/receive_department/wait/reserve_minute_select_ajax/{store_id}/depart/{department_id}" \
-           f"?receive%5Breceipt_date%5D%5Bdate%5D={epoch_JST_of_the_day}&receive%5Breceipt_date%5D%5Bhour%5D="
+           f"?receive%5Breceipt_date%5D%5Bdate%5D={epoch_jst_of_the_day}&receive%5Breceipt_date%5D%5Bhour%5D="
+
+
+def do_mugen (store_id, hours_to_search):
+    epoch = calculate_epoch_time_of_the_day()
+
+    base_url = base_url_generator(
+        store_id=store_id,
+        department_id=get_department_id(store_id_to_search),
+        epoch_jst_of_the_day=epoch
+    )
+
+    try:
+        mugen(base_url, hours_to_search)
+    except:
+        do_mugen(store_id, hours_to_search)
 
 
 if __name__ == '__main__':
     # ここからの5行が設定
-
-    year = 2020
-    month = 10
-    day = 28
     hours = [18, 19, 20]  # 何時台を検索するかを指定します。
     store_id_to_search = 110202  # 店舗URLの末尾の数字を指定します。
     # 例；くら寿司品川駅前店（ https://epark.jp/detail/wait/479 ）の場合、「479」。
 
     # 設定ここまで
 
-    epoch = calculate_epoch_time_of_the_day(year=year, month=month, day=day)
-
-    base_url = base_url_generator(
-        store_id=store_id_to_search,
-        department_id=get_department_id(store_id_to_search),
-        epoch_JST_of_the_day=epoch
-    )
-
-    mugen(base_url, hours)
+    do_mugen(store_id_to_search, hours)
