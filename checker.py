@@ -46,13 +46,16 @@ def base_url_generator(store_id: int, department_id: int, epoch_JST_of_the_day: 
 
 if __name__ == '__main__':
     # ここからの5行が設定
+
     year = 2020
     month = 10
     day = 28
-    hours = [18, 19, 20]
-    store_id_to_search = 110202  # 店舗URLの末尾の数字。
+    hours = [18, 19, 20]  # 何時台を検索するかを指定します。
+    store_id_to_search = 110202  # 店舗URLの末尾の数字を指定します。
     # 例；くら寿司品川駅前店（ https://epark.jp/detail/wait/479 ）の場合、「479」。
+
     # 設定ここまで
+
     epoch = calculate_epoch_time_of_the_day(year=year, month=month, day=day)
 
     base_url = base_url_generator(
