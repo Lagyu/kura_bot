@@ -48,7 +48,7 @@ def base_url_generator(store_id: int, department_id: int, epoch_jst_of_the_day: 
            f"?receive%5Breceipt_date%5D%5Bdate%5D={epoch_jst_of_the_day}&receive%5Breceipt_date%5D%5Bhour%5D="
 
 
-def do_mugen (store_id, hours_to_search):
+def do_mugen(store_id, hours_to_search):
     epoch = calculate_epoch_time_of_the_day()
 
     base_url = base_url_generator(
