@@ -64,7 +64,7 @@ def do_mugen (store_id, hours_to_search):
 
 
 if __name__ == '__main__':
-    # ここからの5行が設定
+    # ここからの2行が設定
     hours = [18, 19, 20]  # 何時台を検索するかを指定します。
     store_id_to_search = 110202  # 店舗URLの末尾の数字を指定します。
     # 例；くら寿司品川駅前店（ https://epark.jp/detail/wait/479 ）の場合、「479」。
