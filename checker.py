@@ -60,6 +60,8 @@ def do_mugen (store_id, hours_to_search):
     try:
         mugen(base_url, hours_to_search)
     except:
+        print("エラーが発生したので再起動しました。")
+        print("日付変更以外でこれが表示された場合は、設定方法が間違っている可能性があります。")
         do_mugen(store_id, hours_to_search)
 
 
